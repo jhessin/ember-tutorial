@@ -5,9 +5,9 @@ import { action } from '@ember/object';
 interface RentalImageArgs {}
 
 export default class RentalImage extends Component<RentalImageArgs> {
-	@tracked isLarge: boolean = false;
+  @tracked isLarge: boolean = false;
 
-	@action toggleSize() {
-		this.isLarge = !this.isLarge;
-	}
+  @action toggleSize() {
+    this.isLarge = !this.isLarge;
+  }
 }
