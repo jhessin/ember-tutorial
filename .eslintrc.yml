@@ -16,13 +16,13 @@ env:
 rules: {}
 overrides:
   - files:
-    - ".template-lintrc.js"
-    - "ember-cli-build.js"
-    - "testem.js"
-    - "blueprints/*/index.js"
-    - "config/**/*.js"
-    - "lib/*/index.js"
-    - "server/**/*.js"
+      - '.template-lintrc.js'
+      - 'ember-cli-build.js'
+      - 'testem.js'
+      - 'blueprints/*/index.js'
+      - 'config/**/*.js'
+      - 'lib/*/index.js'
+      - 'server/**/*.js'
     parserOptions:
       sourceType: script
     env:
@@ -31,10 +31,10 @@ overrides:
     plugins:
       - node
     extends:
-      - "plugin:node/recommended"
+      - 'plugin:node/recommended'
     rules:
-      "node/no-unpublished-require": off
+      'node/no-unpublished-require': off
   - files:
-    - "tests/**/*-test.{js,ts}"
+      - 'tests/**/*-test.{js,ts}'
     extends:
-      - "plugin:qunit/recommended"
+      - 'plugin:qunit/recommended'
