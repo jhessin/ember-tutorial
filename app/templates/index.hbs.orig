@@ -1,6 +1,10 @@
 <Jumbo>
 	<h2>Welcome to Super Rentals!</h2>
+<<<<<<< HEAD
 	<p>We hope you find exactly what you're looking for in a place to stay.</p>
+=======
+	<p>We hope you find exactly what your looking for in a place to stay.</p>
+>>>>>>> baseline
 	<LinkTo @route="about" class="button">About Us</LinkTo>
 </Jumbo>
 
@@ -9,6 +13,9 @@
 		<li><Rental /></li>
 		<li><Rental /></li>
 		<li><Rental /></li>
+<<<<<<< HEAD
+=======
 		<li><Rental /></li>
+>>>>>>> baseline
 	</ul>
 </div>
