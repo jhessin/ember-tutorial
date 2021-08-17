@@ -2,12 +2,36 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
+import { iProperty } from 'super-rentals/routes';
 
 module('Integration | Component | rental', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders information about a rental property', async function (assert) {
-    await render(hbs`<Rental />`);
+    const property: {
+      rental: iProperty;
+    } = {
+      rental: {
+        title: 'Grand Old Mansion',
+        owner: 'Veruca Salt',
+        city: 'San Francisco',
+        location: {
+          lat: 37.7749,
+          lng: -122.4194,
+        },
+        category: 'Estate',
+        type: 'Standalone',
+        bedrooms: 15,
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/c/cb/Crane_estate_(5).jpg',
+        description:
+          'This grand old mansion sits on over 100 acres of rolling hills and dense redwood forests.',
+      },
+    };
+
+    this.setProperties(property);
+
+    await render(hbs`<Rental @rental={{this.rental}}/>`);
 
     assert.dom('article').hasClass('rental');
     assert.dom('article h3').hasText('Grand Old Mansion');
