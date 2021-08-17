@@ -52,6 +52,71 @@ module('Integration | Component | map', function (hooks) {
     );
   });
 
+  test('it updates the `src` attribute when the arguments change', async function (assert) {
+    this.setProperties({
+      lat: 37.7749,
+      lng: -122.4194,
+      zoom: 10,
+      width: 150,
+      height: 120,
+    });
+
+    await render(hbs`
+      <Map
+      @lat={{this.lat}}
+      @lng={{this.lng}}
+      @width={{this.width}}
+      @height={{this.height}}
+      @zoom={{this.zoom}}
+      />
+      `);
+
+    let img = find('.map img');
+    // eslint-disable-next-line qunit/no-early-return
+    if (!(img instanceof HTMLImageElement)) return;
+
+    assert.ok(
+      img.src.includes('-122.4194,37.7749,10'),
+      'the src should include the lng,lat,zoom parameter' + img.src
+    );
+
+    assert.ok(
+      img.src.includes('150x120@2x'),
+      'the src should include the width,height and @2x parameters' + img.src
+    );
+
+    this.setProperties({
+      width: 300,
+      height: 200,
+      zoom: 12,
+    });
+
+    assert.ok(
+      img.src.includes('-122.4194,37.7749,12'),
+      'the src should include the lng,lat,zoom parameter' + img.src
+    );
+
+    assert.ok(
+      img.src.includes('300x200@2x'),
+      'the src should include the width,height and @2x parameters' + img.src
+    );
+
+    this.setProperties({
+      lat: 47.6062,
+      lng: -122.3321,
+    });
+
+    assert.ok(
+      img.src.includes('-122.3321,47.6062,12'),
+      'the src should include the lng,lat,zoom parameter'
+    );
+
+    assert.ok(
+      img.src.includes('300x200@2x'),
+      'the src should include the width,height and @2x parameter'
+    );
+  });
+
   test('the default alt attribute can be overridden', async function (assert) {
     await render(hbs`
       <Map
