@@ -1,10 +1,11 @@
 <article class='rental'>
-  <Rental::Image
-  src={{@rental.image}}
-  alt='A picture of {{@rental.title}}'
-  />
+  <Rental::Image src={{@rental.image}} alt='A picture of {{@rental.title}}' />
   <div class='details'>
-    <h3>{{@rental.title}}</h3>
+    <h3>
+      <LinkTo @route='rental' @model={{@rental}}>
+        {{@rental.title}}
+      </LinkTo>
+    </h3>
     <div class='detail owner'><span>Owner:</span> {{@rental.owner}}</div>
     <div class='detail type'><span>Type:</span> {{@rental.type}}</div>
     <div class='detail location'><span>Location:</span> {{@rental.city}}</div>

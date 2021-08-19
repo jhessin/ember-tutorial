@@ -2,7 +2,7 @@ import Route from '@ember/routing/route';
 
 const COMMUNITY_CATEGORIES = ['Condo', 'Townhouse', 'Apartment'];
 
-interface iModel {
+interface iData {
   type: string;
   id: string;
   attributes: {
@@ -20,11 +20,11 @@ interface iModel {
   };
 }
 
-interface iData {
-  data: iModel[];
+interface iJson {
+  data: iData;
 }
 
-export interface iProperty {
+export interface iModel {
   type: string;
   id: string;
   title: string;
@@ -40,19 +40,16 @@ export interface iProperty {
   description: string;
 }
 
-export default class IndexRoute extends Route {
-  async model(): Promise<iProperty[]> {
-    let res = await fetch('/api/rentals.json');
-    let parsed: iData = await res.json();
-    const { data } = parsed;
+export default class RentalRoute extends Route {
+  async model(params: { rental_id: string }): Promise<iModel> {
+    let res = await fetch(`/api/rentals/${params.rental_id}.json`);
+    let { data }: iJson = await res.json();
 
-    return data.map((model) => {
-      let { id, attributes } = model;
-      let type = COMMUNITY_CATEGORIES.includes(attributes.category)
-        ? 'Community'
-        : 'Standalone';
+    let { id, attributes } = data;
+    let type = COMMUNITY_CATEGORIES.includes(attributes.category)
+      ? 'Community'
+      : 'Standalone';
 
-      return { id, type, ...attributes };
-    });
+    return { id, type, ...attributes };
   }
 }
